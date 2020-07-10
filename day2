@@ -1,0 +1,226 @@
+Functions in Go Language
+Functions are generally the block of codes or statements in a program that gives the user the ability to reuse the same code which ultimately saves 
+the excessive use of memory, acts as a time saver and more importantly, provides better readability of the code. So basically, a function is a collection 
+of statements that perform some specific task and return the result to the caller. A function can also perform some specific task without returning anything.
+func f_name(var ver_type) (returnvar vartype){
+}
+
+Function Arguments
+Call by value: : In this parameter passing method, values of actual parameters are copied to function’s formal parameters and the two types of parameters are
+stored in different memory locations. So any changes made inside functions are not reflected in actual parameters of the caller.
+Call by reference: Both the actual and formal parameters refer to the same locations, so any changes made inside the function
+are actually reflected in actual parameters of the caller
+
+Variadic Functions in Go:
+The function that called with the varying number of arguments is known as variadic function. Or in other words,
+a user is allowed to pass zero or more arguments in the variadic function. fmt.Printf is the example of the variadic function,
+it required one fixed argument at the starting after that it can accept any number of arguments.
+function function_name(para1, para2...type)type{
+// code...
+}
+Inside the function …type behaves like a slice.
+When you do not pass any argument in the variadic function, then the silce inside the function is nil.
+You can not use variadic parameter as a return value, but you can return it as a slice.
+func joinstr(element...string)string{ 
+    return strings.Join(element, "-") 
+} 
+fmt.Println(joinstr("Geeks", "for", "Geeks")) 
+When we use a Variadic function:
+Variadic function is used when you want to pass a slice in a function.
+Variadic function is used when we don’t know the quantity of parameters.
+When you use variadic function in your program, it increase the readability of your program.
+
+
+Anonymous function in Go Language
+Go language provides a special feature known as an anonymous function. An anonymous function is a function which doesn’t contain any name. 
+It is useful when you want to create an inline function. In Go language, an anonymous function can form a closure. An anonymous function is also known as function literal.
+func(parameter_list)(return_type){
+// code..
+return
+}()
+In Go language, you are allowed to assign an anonymous function to a variable. 
+You can also pass arguments in the anonymous function.
+You can also pass an anonymous function as an argument into other function.
+You can also return an anonymous function from another function.
+
+
+main and init function in Golang
+The Go language reserve two functions for special purpose and the functions are main() and init() function.
+main()
+In Go language, the main package is a special package which is used with the programs that are executable and this package contains main() function. 
+The main() function is a special type of function and it is the entry point of the executable programs. It does not take any argument nor return anything.
+Go automatically call main() function, so there is no need to call main() function explicitly and every 
+executable program must contain single main package and main() function.
+
+init()
+init() function is just like the main function, does not take any argument nor return anything. This function is present in every package and this
+function is called when the package is initialized. This function is declared implicitly, so you cannot reference it from anywhere and you are allowed to 
+create multiple init() function in the same program and they execute in the order they are created. You are allowed to create init() function anywhere 
+in the program and they are called in lexical file name order (Alphabetical Order). And allowed to put statements if the init() function, 
+but always remember to init() function is executed before the main() function call, so it does not depend to main() function. 
+The main purpose of the init() function is to initialize the global variables that cannot be initialized in the global context.
+package main 
+// Importing package 
+import "fmt" 
+// Multiple init() function 
+func init() { 
+    fmt.Println("Welcome to init() function") 
+} 
+func init() { 
+    fmt.Println("Hello! init() function") 
+} 
+// Main function 
+func main() { 
+    fmt.Println("Welcome to main() function") 
+} 
+Output:
+Welcome to init() function
+Hello! init() function
+Welcome to main() function
+
+Named Return Parameters in Golang
+Basically, it eliminates the requirement of mentioning the variables name with the return statement. By using named return parameters or named parameters
+one can only use return keyword at the end of the function to return the result to the caller. This concept is generally used when a function has to return multiple values. 
+So for the user comfort and to enhance the code readability, Golang provide this facility.
+func function_name(Parameter-list)(result_parameter1 data-_type, result_parameter2 data_type, ….){
+// function body…..
+return
+}
+package main 
+import "fmt"
+// Main Method 
+func main() { 
+}   
+// function having named arguments 
+func calculator(a, b int) (mul int, div int) { 
+} 
+Output:
+105 x 7 =  735
+105 / 7 =  15
+If the type of all the named return arguments is common or same then you can specify the common data type.
+Compare the below code with the example that you read above to get a better understandability.
+// function having named arguments
+func calculator(a, b int) (mul, div int) {
+}
+After using named return parameters the return statement is generally termed as Naked or Bare return.
+By default, Golang defines all the named variables with the zero value and function will able to use them. In case function doesn’t 
+modify the values then automatically zero value will return.
+
+What is Blank Identifier(underscore) in Golang?
+_(underscore) in Golang is known as the Blank Identifier. Identifiers are the user-defined name of the program components used for the identification purpose. 
+Golang has a special feature to define and use the unused variable using Blank Identifier. Unused variables are those 
+variables which are defined by the user throughout the program but he/she never make the use of these variables. These variables make the program almost unreadable
+mul, _ := mul_div(105, 7) 
+Important Points:
+You can use multiple Blank Identifier in the same program. So you can say a Golang program can have multiple variables using the same identifier
+name which is the blank identifier.
+There are many cases that arise the requirement of assignment of values just to complete the syntax even knowing that the values will not be going to 
+be used in the program anywhere. Like a function returning multiple values. Mostly blank identifier is used in such cases.
+You can use any value of any type with the Blank Identifier.
+
+Defer Keyword in Golang:
+In Go language, defer statements delay the execution of the function or method or an anonymous method until the nearby functions returns.
+Or in other words, defer function or method call arguments evaluate instantly, but they execute until the nearby functions returns. 
+You can create a deferred method, or function, or anonymous function by using the defer keyword.
+// Function
+defer func func_name(parameter_list Type)return_type{
+// Code
+}
+// Method
+defer func (receiver Type) method_name(parameter_list){
+// Code
+}
+defer func (parameter_list)(return_type){
+// code
+}()
+Important Points:
+In Go language, multiple defer statements are allowed in the same program and they are executed in LIFO(Last-In, First-Out) order as shown in Example 2.
+In the defer statements, the arguments are evaluated when the defer statement executed, not when they called.
+Defer statements are generally used to ensure that the files are closed when your work is finished with them, or to close the channel, or to catch the panics in the program.
+package main   
+import "fmt" 
+// Functions 
+func add(a1, a2 int) int { 
+    res := a1 + a2 
+    fmt.Println("Result: ", res) 
+    return 0 
+} 
+// Main function 
+func main() {
+    fmt.Println("Start") 
+    // Multiple defer statements 
+    // Executes in LIFO order 
+    defer fmt.Println("End") 
+    defer add(34, 56) 
+    defer add(10, 10) 
+} 
+Output:
+Start
+Result:  20
+Result:  90
+End
+
+Methods in Golang:
+Go language support methods. Go methods are similar to Go function with one difference, i.e, the method contains a receiver argument in it. 
+With the help of the receiver argument, the method can access the properties of the receiver. Here, the receiver can be of struct type or non-struct type. 
+When you create a method in your code the receiver and receiver type must present in the same package. And you are not allowed to create a method in 
+which the receiver type is already defined in another package including inbuilt type like int, string, etc. If you try to do so, then the compiler will give an error.
+func(reciver_name Type) method_name(parameter_list)(return_type){
+// Code
+}
+Here, the receiver can be accessed within the method.
+In Go language, you are allowed to create a method with non-struct type receiver as long as the type and the method definitions are present in the same package
+package main
+import "fmt"
+// Type definition 
+type data int
+// Defining a method with 
+// non-struct type receiver 
+func (d1 data) multiply(d2 data) data { 
+    return d1 * d2 
+} 
+/* 
+// if you try to run this code, 
+// then compiler will throw an error 
+func(d1 int)multiply(d2 int)int{ 
+return d1 * d2 
+} 
+*/
+// Main function 
+func main() { 
+    value1 := data(23) 
+    value2 := data(20) 
+    res := value1.multiply(value2) 
+    fmt.Println("Final result: ", res) 
+} 
+In Go language, you are allowed to create a method with a pointer receiver
+func (p *Type) method_name(...Type) Type {
+// Code
+}
+METHOD	                                                                                                  FUNCTION
+It contain receiver.	                                                                  It does not contain receiver.
+It can accept both pointer and value.	                                                  It cannot accept both pointer and value.
+Methods of the same name but different types can be defined in the program.	            Functions of the same name but different type are not allowed to define in the program.
+
+Methods With Same Name in Golang
+In Go language, it is allowed to create two or more methods with the same name in the same package, but the receiver of these methods must be of different types. 
+This feature does not available in Go function, means you are not allowed to create same name methods in the same package, if you try to do,
+then the compiler will throw an error.
+Syntax:
+func(reciver_name_1 Type) method_name(parameter_list)(return_type){
+// Code
+}
+func(reciver_name_2 Type) method_name(parameter_list)(return_type){
+// Code
+}
+
+
+
+
+
+
+
+
+
+
+
