@@ -1,0 +1,138 @@
+Structures in Golang
+Structures in Golang
+A structure or struct in Golang is a user-defined type that allows to group/combine items of possibly different types into a single type. 
+Any real-world entity which has some set of properties/fields can be represented as a struct. This concept is generally compared with the
+classes in object-oriented programming. It can be termed as a lightweight class that does not support inheritance but supports composition.
+For Example, an address has a name, street, city, state, Pincode. It makes sense to group these three properties into a single structure address as shown below.
+Declaring a structure:
+ type Address struct {
+      name string 
+      street string
+      city string
+      state string
+      Pincode int
+}
+In the above, the type keyword introduces a new type. 
+var a Address // declaring the structure 
+You can also initialize a variable of a struct type using a struct literal as shown below:
+var a = Address{"Akshay", "PremNagar", "Dehradun", "Uttarakhand", 252636}
+Go also supports the name: value syntax for initializing a struct (the order of fields is irrelevant when using this syntax). And this allows you to initialize only a subset of fields. All the uninitialized fields are set to their corresponding zero value.
+Example:
+var a = Address{Name:”Akshay”, street:”PremNagar”, state:”Uttarakhand”, Pincode:252636} //city:””
+
+Structure Equality in Golang:
+In Go language, you are allowed to compare two structures if they are of the same type and contain the same fields values with the help of == operator or DeeplyEqual() Method.
+Both the operator and method return true if the structures are identically equal(in terms of their fields values) to each other, otherwise, return false.
+And, if the compared variables belong to different structures, then the compiler will give an error. 
+The DeeplyEqual() method is defined under “reflect” package.
+fmt.Println("Is a1 equal to a2: ", reflect.DeepEqual(a1, a2))
+or
+if a1 == a2 {
+
+Nested Structure in Golang
+A structure or struct in Golang is a user-defined type, which allows us to create a group of elements of different types into a single unit.
+Any real-world entity which has some set of properties or fields can be represented as a struct. Go language allows nested structure. 
+A structure which is the field of another structure is known as Nested Structure. Or in other words, a structure within another structure is known as a Nested Structure.
+package main 
+import "fmt"
+// Creating structure 
+type Author struct { 
+    name   string 
+    branch string 
+    year   int
+} 
+// Creating nested structure 
+type HR struct { 
+  
+    // structure as a field 
+    details Author 
+} 
+func main() { 
+  
+    // Initializing the fields 
+    // of the structure 
+    result := HR{     
+        details: Author{"Sona", "ECE", 2013}, 
+    } 
+    // Display the values 
+    fmt.Println("\nDetails of Author") 
+    fmt.Println(result) 
+} 
+
+Anonymous Structure and Field in Golang:
+ you are allowed to create an anonymous structure. An anonymous structure is a structure which does not contain a name. 
+ It useful when you want to create a one-time usable structure. You can create an anonymous structure using the following syntax:
+variable_name := struct{
+// fields
+}{// Field_values}
+Element := struct { 
+        name      string 
+        branch    string 
+        language  string 
+        Particles int
+    }{ 
+        name:      "Pikachu", 
+        branch:    "ECE", 
+        language:  "C++", 
+        Particles: 498, 
+    } 
+In a Go structure, you are allowed to create anonymous fields. Anonymous fields are those fields which do not contain any name you 
+just simply mention the type of the fields and Go will automatically use the type as the name of the field. You can create anonymous fields 
+of the structure using the following syntax:
+type struct_name struct{
+    int
+    bool
+    float64
+}
+In a structure, you are not allowed to create two or more fields of the same type as shown below:
+
+Promoted Fields in Golang Structure
+In Go structure, promoted fields are just like anonymous fields, the type of the field is the name of the field. We use this 
+concept in the nested structure where a structure is a field in another structure, simply by just adding the name of the structure into another
+structure and it behaves like the Anonymous Field to the nested structure. 
+
+
+Function as a Field in Golang Structure
+A structure or struct in Golang is a user-defined type, which allows us to create a group of elements of different types into a single unit.
+Any real-world entity which has some set of properties or fields can be represented as a struct. As we know that in Go language function is also a user-defined type so, 
+you are allowed to create a function field in the Go structure. 
+type Finalsalary func(int, int) int 
+// Creating structure 
+type Author struct { 
+    name      string 
+    language  string 
+    Marticles int
+    Pay       int
+  
+    // Function as a field 
+    salary Finalsalary 
+}   
+// Main method 
+func main() {   
+    // Initializing the fields 
+    // of the structure 
+    result := Author{ 
+        name:      "Sonia", 
+        language:  "Java", 
+        Marticles: 120, 
+        Pay:       500, 
+        salary: func(Ma int, pay int) int { 
+            return Ma * pay 
+        }, 
+    } 
+    // Display values 
+    fmt.Println("Author's Name: ", result.name) 
+    fmt.Println("Language: ", result.language) 
+    fmt.Println("Total number of articles published in May: ", result.Marticles) 
+    fmt.Println("Per article pay: ", result.Pay) 
+    fmt.Println("Total salary: ", result.salary(result.Marticles, result.Pay)) 
+} 
+Output:
+Author's Name:  Sonia
+Language:  Java
+Total number of articles published in May:  120
+Per article pay:  500
+Total salary:  60000
+
+
+
