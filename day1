@@ -1,0 +1,264 @@
+go lang is procedural programming  launguage which is launched in 2009 developed by robert,rob,ken.
+support dynamic programming using type inferance ( y := 8)
+this is open source programming launguage .
+
+package main   //It is the initial point to run the program
+import "fmt"   //It contains import “fmt”, it is a preprocessor command which tells the compiler to include the files lying in the package.
+func main(){  //main function, it is beginning of execution of program.
+fmt.Println("sonali")
+}
+
+Why this “Go language”?
+is an effort to combine the ease of programming of an interpreted, dynamically typed language with the efficiency and safety of a statically typed, compiled language
+ It also aims to be modern, with support for networked and multicore computing.
+ 
+ What excluding in Go which is present in other languages?
+ There are no forward declarations and no header files; everything is declared exactly once.
+ using the := declare-and-initialize construct.
+  language whose threading takes more memory and slows down the performance of our system, Hence to overcome such problem Golang has been designed in such
+  a way that instead of using threading it uses Goroutine, which is similar to threading but consumes very less memory.
+  Like threading consumes 1MB whereas Goroutine consumes 2KB of memory, hence at the same time, we can have millions of goroutine triggered.
+So the above-discussed point makes golang a strong language that handles concurrency like C++ and Java.
+
+
+Advantages and Disadvantages of Go Language
+Flexible- It is concise, simple and easy to read.
+Concurrency- It allows multiple process running simultaneously and effectively.
+Quick Outcome- Its compilation time is very fast.
+Library- It provide a rich standard library.
+Garbage collection- It is a key feature of go. Go excels in giving a lot of control over memory allocation and has
+dramatically reduced latency in the most recent versions of the garbage collector.
+It validates for the interface and type embedding.
+Golang is cross-platform
+Creates only one executable file output after the compilation without any dependencies, so that you can upload it anywhere which Go supports and just run it.
+Or just compile it there after you upload the code. No dependency hell.
+
+
+Golang has some disadvantages, such as:
+less flexibility, than in dynamically typed languages;
+lack of 3-rd party modules;
+it differs a lot from C-based languages;
+has no generics (generics allow writing code which can be reusable – it saves
+
+
+Some popular Applications developed in Go Language
+Docker: a set of tools for deploying linux containers
+Openshift: a cloud computing platform as a service by Red Hat.
+Kubernetes: The future of seamlessly automated deployment processes
+Dropbox: migrated some of their critical components from Python to Go.
+Netflix: for two part of their server architecture.
+InfluxDB: is an open-source time series database developed by InfluxData.
+Golang: The language itself was written in Go.
+
+Features of go language
+Language Design
+Package Management
+Powerful standard library
+Static Typing
+testing Support
+Platform Independent
+
+
+PYTHON	                                                                              GOLANG
+It is a high-level programming language based on object-oriented programming.	        It is a procedural programming language based on concurrent programming.
+Python support exceptions.	Go does not support exceptions.                            Instead of exception Go has error.
+Python has class and objects.	                                                          Go does not support object-oriented programming.So, it does not have classes and objects.
+It supports inheritance.	                                                              It does not support inheritance.
+It does not support Goroutines and channel.                                           	It supports Goroutines and channel.
+It does not support interfaces.	                                                        It supports interfaces.
+It is a dynamically typed language. So, it uses interpreter.	                           It is a statically typed language. So, it uses compiler.
+It is less verbose than Go.	                                                              It is more verbose than Python.
+It does not contain any in-built concurrency mechanism.	                                  It fully supports concurrency.
+It is good for data analysis and computing.	                                                It is good for system programming.
+
+
+There are total 25 keywords present in the Go language as follows:
+break
+case
+chan
+const
+continue
+default
+defer
+else
+fallthrough
+for
+func
+go
+goto
+if
+import
+interface
+map
+package
+range
+return
+select
+struct
+switch
+type
+var
+
+
+Data Types in Go
+Basic type: Numbers, strings, and booleans come under this category.
+Aggregate type: Array and structs come under this category.
+Reference type: Pointers, slices, maps, functions, and channels come under this category.
+Interface type
+
+
+How to print variable and its type:
+fot type fmt.Println("%T",t)
+for value fmt.Println("%S",s)
+
+
+Declaring a Variable
+Using var keyword: In Go language, variables are created using var keyword of a particular type, connected with name and provide its initial value.
+
+var v int
+var s string 
+var variable_name type = expression
+If the expression is removed, then the variable holds zero-value for the type like zero for the number, false for Booleans, “” for strings, 
+and nil for interface and reference type. So, there is no such concept of an uninitialized variable in Go language.
+ short variable declaration: The local variables which are declared and initialize in the functions are declared by using short variable declaration.
+Syntax:
+variable_name:= expression
+Note: Please don’t confuse in between := and = as := is a declaration and = is assignment.
+
+Most of the local variables are declared and initialized by using short variable declarations due to their brevity and flexibility.
+The var declaration of variables are used for those local variables which need an explicit type that differs from the initializer expression,
+or for those variables whose values are assigned later and the initialized value is unimportant.
+Using short variable declaration you are allowed to declare multiple variables in the single declaration.
+Example:
+
+
+CONSTANTS:
+As the name CONSTANTS suggests means fixed, in programming languages also it is same i.e., once the value of constant is defined it cannot be modified further. 
+How to declare?
+Constant are declared like variables but in using a const keyword as a prefix to declare constant with a specific type. It cannot be declare using := syntax.
+
+
+Rune in Golang
+In the past, we only deal with one character set that is known as ASCII or the American Standard Code for Information Interchange.
+Here we use 7 bits to represent 128 characters, including upper and lowercase English letters, digits, and a variety of punctuations and device-control characters. 
+Due to this a large number of the population of the world is not able to use their own writing system on the computer. So to solve this problem Unicode is invented.
+It is a superset of ASCII and contains all the characters present in the world’s writing system including accents and other diacritical marks, control codes like tab and 
+carriage return, and assigns each one a standard number called a Unicode code point, or in Go language, a rune. The rune type is an alias of int32.
+Important Points:
+Always remember a string is a sequence of bytes not of a rune. But it is possible that a string may contain Unicode text encoded in UTF-8 and as we knew that the go source code in always encodes as UTF-8 so, there is no need to encode the string in UTF-8.
+UTF-8 encodes all the Unicode in between 1 to 4 bytes, where 1 byte is used for ASCII and rest used for the rune.
+ASCII contains total 256 elements. In which 128 are characters and 0-127 are identified as code points. Here code point refers to the element which represents a single value.
+Example:
+ ♄
+It is a rune with hexadecimal value &#x2644.
+
+
+
+VAR KEYWORD	                                                                              SHORT DECLARATION OPERATOR
+var is a lexical keyword present in Golang.               	                            := is known as the short declaration operator.
+It is used to declare and initialize the variables inside and outside the functions.	  It is used to declare and initialize the variables only inside the functions.
+Using this, variables have generally package level or global level scope.                It can also have local scope.	Here, variables has only local scope as they are only declared inside functions.
+Declaration and initialization of the variables can be done separately.	                 Declaration and initialization of the variables must be done at the same time.
+It is optional to put type along with the variable declaration.	                            There is no need to put type. If you, it will give erro
+
+
+Go Decision Making (if, if-else, Nested-if, if-else-if)
+if (){
+}else if (){
+}else{
+}
+
+loops in golang:
+    p:= []int{2,3,4,5}  
+    for i:= range p { 
+       fmt.Println(i)  
+       }
+or 
+for i := 0; i < 4; i++{ 
+      fmt.Printf("GeeksforGeeks\n")   
+    } 
+or
+infinite for loop 
+for {
+fmt.Println(""hi)
+}
+or 
+for i, j:= range "XabCd" { 
+       fmt.Printf("The index number of %U is %d\n", j, i)  
+    } 
+    
+    
+Loop Control Statements in Go Language
+Break
+Goto
+Continue
+
+
+
+Switch Statement in Go
+switch day:=4; day{ 
+       case 2: 
+       fmt.Println("Monday") 
+       case 4: 
+       fmt.Println("Sunday") 
+}
+
+or
+day:=2
+switch {
+       case 2: 
+       fmt.Println("Monday") 
+       case 3: 
+       fmt.Println("Sunday") 
+       }
+
+
+or 
+
+day:=2
+switch day {
+       case 2: 
+       fmt.Println("Monday") 
+       case 3,5,6: 
+       fmt.Println("Sunday") 
+       }
+or
+Type switch is used when you want to compare types
+
+switch p:= day.(type){
+       case bool: 
+       fmt.Println("Monday") 
+       case int: 
+       fmt.Println("Sunday") 
+}
+
+
+Golang | Deadlock and Default Case in Select Statement
+In Go language, the select statement is just like a switch statement, but in the select statement, the case statement refers to communication,
+i.e. sent or receive operation on the channel.
+Deadlock: When you trying to read or write data from the channel but the channel does not have value. So, it blocks the current execution of the goroutine 
+and passes the control to other goroutines, but if there is no other goroutine is available or other goroutines are sleeping due to this situation program will crash.
+This phenomenon is known as deadlock
+    // Creating a channel 
+    c := make(chan int) 
+    select { 
+    case <-c: 
+    default: 
+        fmt.Println("!.. Default case..!") 
+    }
+ !.. Default case..!
+You are also allowed to use default case when the select statement has only nil channel. As shown in the below example, channel c is nil, so default case 
+executed if here default case is not available, then the program will be blocked forever and deadlock arises.
+select block until one of its cases can run .Select statement waits until the communication(send or receive operation) is prepared for some cases to begin
+if more cases are ready then randomly it will select 
+for infinite loop
+// without any case 
+   select{ } 
+  
+
+
+
+
+
+
+
