@@ -1,0 +1,168 @@
+Strings in Golang
+strings are the immutable chain of arbitrary bytes(including bytes with zero value) or string is a read-only slice of bytes and the bytes 
+of the strings can be represented in the Unicode text using UTF-8 encoding.
+Due to UTF-8 encoding Golang string can contain a text which is the mixture of any language present in the world, without any confusion and
+limitation of the page. Generally, strings are enclosed in double-quotes””
+String can be empty, but they are not nil.
+var s string 
+s="sonali"
+or 
+s:= "sonali"
+Strings are immutable: In Go language, strings are immutable once a string is created the value of the string cannot be changed. Or in other words,
+strings are read-only. If you try to change, then the compiler will throw an error.
+You can iterate over string using for rang loop. This loop can iterate over the Unicode code point for a string.
+for index, chr:= range str{
+     // Statement..
+}
+In Golang string, you can find the length of the string using two functions one is len() and another one is RuneCountInString(). 
+The RuneCountInString() function is provided by UTF-8 package
+
+mystr := "Welcome to GeeksforGeeks ??????"
+length1 := len(mystr) 
+length2 := utf8.RuneCountInString(mystr)
+fmt.Println("string:", mystr) 
+    fmt.Println("Length 1:", length1) 
+    fmt.Println("Length 2:", length2) 
+} 
+Output:
+string: Welcome to GeeksforGeeks ??????
+Length 1: 31
+Length 2: 31
+
+Different ways to compare Strings in Golang
+== and != operator is used to check if the given strings are equal or not. 
+using Compare() method for strings package 
+
+Different ways to concatenate two strings in Golang
+the string is an immutable chain of arbitrary bytes encoded with UTF-8 encoding. In Go strings, the process of adding two or more strings into a
+new single string is known as concatenation. The simplest way of concatenating two or more strings in the Go language is by using + operator.
+It is also known as a concatenation operator.
+
+Using bytes.Buffer
+package main 
+import ( 
+    "bytes"
+    "fmt"
+) 
+func main() { 
+    // Creating and initializing strings 
+    // Using bytes.Buffer with  
+    // WriteString() function 
+    var b bytes.Buffer 
+    b.WriteString("G") 
+    b.WriteString("e") 
+    b.WriteString("e") 
+    b.WriteString("k") 
+    b.WriteString("s")       
+    fmt.Println("String: ", b.String()) 
+    }
+    String:  Geeks
+    
+    Using Sprintf: In Go language, you can also concatenate string using Sprintf() method.
+    result := fmt.Sprintf("%s%s%s%s", str1,  
+                          str2, str3, str4) 
+    fmt.Println(result)
+    
+    Using += operator or String append: In Go strings, you are allowed to append a string using += operator. 
+    This operator adds a new or given string to the end of the specified string.
+    str1 += str2 
+    fmt.Println("String: ", str1) 
+  
+  Join() function: This function concatenates all the elements present in the slice of string into a single string. This function is available in string package.
+   result := strings.Join(myslice, "-") 
+    fmt.Println(result) 
+    
+How to Trim a String in Golang?
+res1 := strings.Trim(str1, "!") 
+res1 := strings.TrimLeft(str1, "!*") 
+res2 := strings.TrimRight(str2, "$") 
+res1 := strings.TrimSpace(str1) 
+
+How to Split a String in Golang?
+res1 := strings.Split(str1, ",") 
+res1 := strings.SplitAfter(str1, ",") 
+
+Check if the given characters is present in Golang String
+res1 := strings.Contains(str1, "Geeks")
+
+This function is used to check whether any Unicode code points in chars are present in the given string. 
+If any Unicode code points in chars are available in the given string, then this method returns true, otherwise, return false.
+  res1 := strings.ContainsAny(str1, "Geeks") 
+    res2 := strings.ContainsAny(str2, "GFG") 
+    res3 := strings.ContainsAny("GeeksforGeeks", "G & f") 
+    res4 := strings.ContainsAny("GeeksforGeeks", "u | e") 
+    res5 := strings.ContainsAny(" ", " ") 
+    res6 := strings.ContainsAny("GeeksforGeeks", " ")
+    
+Repeating a String for Specific Number of Times in Golang
+res1 := strings.Repeat(str1, 4) 
+res2 := str2 + strings.Repeat("Language..", 2) 
+
+ndex: This function is used to find the index value of the first instance of the given string from the original string.
+If the given string is not available in the original string, then this method will return -1.
+str1 := "Welcome to the online portal of GeeksforGeeks"
+    str2 := "My dog name is Dollar"
+  res1 := strings.Index(str1, "Geeks") 
+    res2 := strings.Index(str2, "do") 
+    Index values:
+Result 1:  32
+Result 2:  3
+IndexAny: This method returns the index of the first instance of any Unicode code point from chars in the original string.
+If the Unicode code point from chars is not available in the original string, then this method will return -1.
+
+How to Count the Number of Repeated Characters in a Golang String?
+res1 := strings.Count(str1, "o") 
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
