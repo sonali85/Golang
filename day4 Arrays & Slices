@@ -1,0 +1,302 @@
+Arrays in Go
+Arrays in Golang or Go programming language is much similar to other programming languages. In the program, sometimes we need to store a collection of data of the same type,
+like a list of student marks. Such type of collection is stored in a program using an Array. An array is a fixed-length sequence that is used 
+to store homogeneous elements in the memory. Due to their fixed length array are not much popular like Slice in Go language.
+In an array, you are allowed to store zero or more than zero elements in it. The elements of the array are indexed by using the [] index operator with 
+their zero-based position, means the index of the first element is array[0] and the index of the last element is array[len(array)-1]
+In Go language, arrays are created in two different ways:
+Using var keyword:
+Var array_name[length]Type
+var a[2] int
+	a[0]=2
+	a[1]=3
+  
+Using shorthand declaration: 
+	p := [2]int{4,6}
+	fmt.Println("Hello, playground",a,p)
+
+Multi-Dimensional Array:
+As we already know that arrays are 1-D but you are allowed to create a multi-dimensional array. Multi-Dimensional arrays are the arrays of arrays of the same type
+	mult := [2][3]int{
+	{3,4,5},
+	{6,7,8},
+	}
+	fmt.Println(mult)
+	for i:=0 ;i<2;i++{
+	for j:=0;j<3;j++{
+	fmt.Println(mult[i][j])
+	}
+	}
+In an array, if an array does not initialized explicitly, then the default value of this array is 0
+In an array, you can find the length of the array using len() method as shown below:
+In an array, if ellipsis ‘‘…’’ become visible at the place of length, then the length of the array is determined by the initialized elements. 
+	l := [...]int{3,4,5,6,6}
+	fmt.Println(l,len(l))
+In an array, you are allowed to iterate over the range of the elements of the array. 
+In Go language, an array is of value type not of reference type. So when the array is assigned to a new variable, 
+then the changes made in the new variable do not affect the original array.
+In an array, if the element type of the array is comparable, then the array type is also comparable. So we can directly compare two arrays using == operator. 
+
+How to Copy an Array into Another Array in Golang?
+// creating a copy of an array by value
+arr := arr1
+// Creating a copy of an array by reference
+arr := &arr1
+
+
+Slices in Golang
+In Go language slice is more powerful, flexible, convenient than an array, and is a lightweight data structure.
+Slice is a variable-length sequence which stores elements of a similar type, you are not allowed to store different type of elements in the same slice. 
+It is just like an array having an index value and length, but the size of the slice is resized they are not in fixed-size just like an array. 
+Internally, slice and an array are connected with each other, a slice is a reference to an underlying array. It is allowed to store duplicate elements in the slice.
+The first index position in a slice is always 0 and the last one will be (length of slice – 1).
+A slice is declared just like an array, but it doesn’t contain the size of the slice. So it can grow or shrink according to the
+[]T
+or 
+[]T{}
+or 
+[]T{value1, value2, value3, ...value n}
+var my_slice[]int
+
+A slice contains three components:
+Pointer: The pointer is used to points to the first element of the array that is accessible through the slice. Here,
+it is not necessary that the pointed element is the first element of the array.
+Length: The length is the total number of elements present in the array.
+Capacity: The capacity represents the maximum size upto which it can expand.
+
+Using slice literal: You can create a slice using the slice literal. The creation of slice literal is just like an array literal, 
+but with one difference you are not allowed to specify the size of the slice in the square braces[]. As shown in the below example, 
+the right-hand side of this expression is the slice literal.
+var my_slice_1 = []string{"Geeks", "for", "Geeks"}
+Note: Always remember when you create a slice using a string literal, then it first creates an array and after that return a slice reference to it
+my_slice_3 := oRignAl_slice[:6] 
+
+Using make() function: You can also create a slice using the make() function which is provided by the go library. This function takes three parameters,
+i.e, type, length, and capacity. Here, capacity value is optional. It assigns an underlying array with a size that is equal to the given capacity 
+and returns a slice which refers to the underlying array. Generally, make() function is used to create an empty slice. Here, empty slices are those 
+slices that contain an empty array reference.
+    var my_slice_1 = make([]int, 4, 7) 
+    fmt.Printf("Slice 1 = %v, \nlength = %d, \ncapacity = %d\n", 
+                   my_slice_1, len(my_slice_1), cap(my_slice_1)) 
+    var my_slice_2 = make([]int, 7) 
+    fmt.Printf("Slice 2 = %v, \nlength = %d, \ncapacity = %d\n", 
+                   my_slice_2, len(my_slice_2), cap(my_slice_2)) 
+Slice 1 = [0 0 0 0], 
+length = 4, 
+capacity = 7
+Slice 2 = [0 0 0 0 0 0 0], 
+length = 7, 
+capacity = 7
+
+ iterate over slice using the following ways:
+ for e := 0; e < len(myslice); e++ { 
+        fmt.Println(myslice[e]) 
+    } 
+  or
+   for index, ele := range myslice { 
+        fmt.Printf("Index = %d and element = %s\n", index+3, ele) 
+    } 
+    
+Modifying Slice: As we already know that slice is a reference type it can refer an underlying array. So if we change some elements in the slice, 
+then the changes should also take place in the referenced array. Or in other words, if you made any changes in the slice, 
+then it will also reflect in the array as shown in the below example:
+Example:
+filter_none
+brightness_4
+// Golang program to illustrate 
+// how to modify the slice 
+package main 
+  import "fmt"
+  func main() { 
+      // Creating a zero value slice 
+    arr := [6]int{55, 66, 77, 88, 99, 22} 
+    slc := arr[0:4]  
+    // Before modifying  
+    fmt.Println("Original_Array: ", arr) 
+    fmt.Println("Original_Slice: ", slc) 
+    // After modification 
+    slc[0] = 100 
+    slc[1] = 1000 
+    slc[2] = 1000 
+    fmt.Println("\nNew_Array: ", arr) 
+    fmt.Println("New_Slice: ", slc) 
+} 
+Output:
+Original_Array:  [55 66 77 88 99 22]
+Original_Slice:  [55 66 77 88]
+New_Array:  [100 1000 1000 88 99 22]
+New_Slice:  [100 1000 1000 88]
+
+Comparsion of Slice: In Slice, you can only use == operator to check the given slice is not or not. If you try to compare two slices with the help of == operator 
+then it will give you an error as shown in the below example:
+ // creating slices 
+    s1 := []int{12, 34, 56} 
+    var s2 []int
+    // If you try to run this commented 
+    // code compiler will give an error 
+    /*s3:= []int{23, 45, 66} 
+      fmt.Println(s1==s3) 
+    */
+    // Checking if the given slice is nil or not 
+    fmt.Println(s1 == nil) 
+    fmt.Println(s2 == nil) 
+} 
+Output:
+false
+true
+Note: If you want to compare two slices, then use range for loop to match each element or you can use DeepEqual function.
+
+Multi-Dimensional Slice: Multi-dimensional slice are just like the multidimensional array, except that slice does not contain
+Sorting of Slice: In Go language, you are allowed to sort the elements present in the slice. The standard library of Go language provides 
+the sort package which contains different types of sorting methods for sorting the slice of ints, float64s, and strings. These functions always sort the
+elements available is slice in ascending order.
+import ( 
+    "fmt"
+    "sort"
+)
+func main() { 
+    // Creating Slice 
+    slc1 := []string{"Python", "Java", "C#", "Go", "Ruby"} 
+    slc2 := []int{45, 67, 23, 90, 33, 21, 56, 78, 89} 
+    fmt.Println("Before sorting:") 
+    fmt.Println("Slice 1: ", slc1) 
+    fmt.Println("Slice 2: ", slc2) 
+    // Performing sort operation on the 
+    // slice using sort function 
+    sort.Strings(slc1) 
+    sort.Ints(slc2) 
+
+
+How to copy one slice into another slice in Golang?
+A Slice is a variable-length sequence which stores elements of a similar type, you are not allowed to store different type of elements in the same slice. 
+In Slice, you can copy one slice into another slice using the copy() function provided by the Go language. Or in other words, copy() function allows you 
+to copy the elements of one slice into another slice.
+ copy_1 := copy(slc2, slc1) 
+ slc1 := []int{58, 69, 40, 45, 11, 56, 67, 21, 65} 
+    var slc2 []int
+    slc3 := make([]int, 5) 
+    slc4 := []int{78, 50, 67, 77} 
+  
+    // Before copying 
+    fmt.Println("Slice_1:", slc1) 
+    fmt.Println("Slice_2:", slc2) 
+    fmt.Println("Slice_3:", slc3) 
+    fmt.Println("Slice_4:", slc4) 
+  
+    // Copying the slices 
+    copy_1 := copy(slc2, slc1) 
+    fmt.Println("\nSlice:", slc2) 
+    fmt.Println("Total number of elements copied:", copy_1) 
+  
+    copy_2 := copy(slc3, slc1) 
+    fmt.Println("\nSlice:", slc3) 
+    fmt.Println("Total number of elements copied:", copy_2) 
+  
+    copy_3 := copy(slc4, slc1) 
+    fmt.Println("\nSlice:", slc4) 
+    fmt.Println("Total number of elements copied:", copy_3) 
+  
+    // Don't confuse here, because in above  
+    // line of code the slc4 has been copied  
+    // and hence modified permanently i.e.  
+    // slc 4 contains [58 69 40 45] 
+    copy_4:= copy(slc1, slc4) 
+    fmt.Println("\nSlice:", slc1) 
+    fmt.Println("Total number of elements copied:", copy_4) 
+      
+} 
+Output:
+
+Slice_1: [58 69 40 45 11 56 67 21 65]
+Slice_2: []
+Slice_3: [0 0 0 0 0]
+Slice_4: [78 50 67 77]
+Slice: []
+Total number of elements copied: 0
+Slice: [58 69 40 45 11]
+Total number of elements copied: 5
+Slice: [58 69 40 45]
+Total number of elements copied: 4
+Slice: [58 69 40 45 11 56 67 21 65]
+Total number of elements copied: 4
+Explanation: In the above example we have four integer type slices and we perform copy operation on them:
+copy_1:= copy(slc2, slc1): Here, slc2 is the destination slice and slc1 is the source slice. Here, slc2 is the nil slice when we try to copy slc1 slice in slc2 slice, then copy method will return the minimum of length of source and destination slice which is zero for empty slice slc2.
+copy_2:= copy(slc3, slc1): Here, slc3 is the destination slice and slc1 is the source slice. Here, the slc3 slice is the empty slice, so when we try to copy slc1 slice into slc3 using copy() function it copies only 5 elements from the slc1 slice starting from index 0 because the length of this slice is 5, so it can not store elements greater than 5.
+copy_3:= copy(slc4, slc1): Here, slc4 is the destination slice and slc1 is the source slice. When we try to copy slc1 slice into slc4 slice using copy() function it copies only 4 elements in it starting from index 0. Because the length of the slc4 slice is 4, so it can not store elements more than 4.
+copy_4:= copy(slc1, slc4): Here, you might be confused after its output. See, slc4 has been updated in the above line of code. So now consider the updated values for slc4. So now slc4 has 4 elements and slc1 has 9 elements. So, the total number of elements that will be copied is 4.
+
+ slc := []string{"C#", "Python", "C", "Perl"} 
+ slc = append(slc, "Java") 
+
+How to compare two slices of bytes in Golang?
+you are allowed to compare two slices of the byte type with each other using Compare() function. This function returns an
+integer value which represents that these slices are equal or not and the values are:
+If the result is 0, then slice_1 == slice_2.
+If the result is -1, then slice_1 < slice_2.
+If the result is +1, then slice_1 > slice_2.
+
+import ( 
+    "bytes"
+    "fmt"
+) 
+    slice_1 := []byte{'G', 'E', 'E', 'K', 'S'} 
+    slice_2 := []byte{'G', 'E', 'e', 'K', 'S'}   
+    // Comparing slice 
+    // Using Compare function 
+    res := bytes.Compare(slice_1, slice_2) 
+    
+    you are allowed to check the equality of the slices with the help of Equal() function. 
+    This function returns true if both the slices are equal, or return false if both the slices are not equal. 
+    It is defined under the bytes package so, you have to import bytes package in your program for accessing Equals function.
+Syntax:
+func Equal(slice_1, slice_1 []byte) bool
+Here, we check the equality between slice_1 and slice_2 and the return type of this function is bool. 
+res := bytes.Equal(slice_1, slice_2) 
+
+for sorting 
+sort.Ints (scl1) 
+
+ IntsAreSorted: This function is used to check whether the given slice of ints is in the sorted form(in increasing order) or not.
+ This method returns true if the slice is in sorted form, or return false if the slice is not in the sorted form
+ res2 := sort.IntsAreSorted(scl2) 
+ 
+ How to trim a slice of bytes in Golang?
+slice_1 := []byte{'!', '!', 'G', 'e', 'e', 'k', 's', 'f',   
+                 'o', 'r', 'G', 'e', 'e', 'k', 's', '#', '#'} 
+    slice_2 := []byte{'*', '*', 'A', 'p', 'p', 'l', 'e', '^', '^'} 
+ res1 := bytes.Trim(slice_1, "!#") 
+    res2 := bytes.Trim(slice_2, "*^") 
+    
+    
+    split the slice
+        slice_1 := []byte{'!', '!', 'G', 'e', 'e', 'k', 's',  
+       'f', 'o', 'r', 'G', 'e', 'e', 'k', 's', '#', '#'} 
+    slice_2 := []byte{'A', 'p', 'p', 'l', 'e'} 
+    slice_3 := []byte{'%', 'g', '%', 'e', '%', 'e',  
+                           '%', 'k', '%', 's', '%'} 
+    // Displaying slices 
+    fmt.Println("Original Slice:") 
+    fmt.Printf("Slice 1: %s", slice_1) 
+    fmt.Printf("\nSlice 2: %s", slice_2) 
+    fmt.Printf("\nSlice 3: %s", slice_3) 
+    // Splitting the slice of bytes 
+    // Using Split function 
+    res1 := bytes.Split(slice_1, []byte("eek")) 
+    res2 := bytes.Split(slice_2, []byte("")) 
+    res3 := bytes.Split(slice_3, []byte("%")) 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
