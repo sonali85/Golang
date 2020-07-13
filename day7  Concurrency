@@ -126,7 +126,119 @@ Syntax:
 select{}
 
 The default statement in the select statement is used to protect select statement from blocking. This statement executes when there is no case statement is ready to proceed.
-In select statement, if multiple cases are ready to proceed, then one of them can be selected randomly
+In select statement, if multiple cases are ready to proceed, then one of them can be selected randomly.
+
+Golang | Goroutine vs Thread
+GOROUTINE                                           	THREAD
+Goroutines are managed by the go runtime.	                             Operating system threads are managed by kernal.
+Goroutine are not hardware dependent.	                                Threads are hardware dependent.
+Goroutines have easy communication medium known as channel. 	       Thread doesnot have easy communication medium.
+Due to the presence of channel one goroutine can communicate 
+with other goroutine with low latency.	      	                           Due to lack of easy communication medium inter-threads communicate takes place with high latency.
+Goroutine doesnot have ID because go doesnot have Thread Local Storage.	    Threads have their own unique ID because they have Thread Local Storage.
+Goroutines are cheaper than threads.	                     	                     	The cost of threads are higher than goroutine.
+They are cooperatively scheduled.	                     	                     	They are preemptively scheduled.
+They have fasted startup time than threads.	                     	                     	They have slow startup time than goroutines.
+Goroutine has growable segmented stacks.		                     	                     Threads doesnot have growable segmented stacks.
+
+
+Channel in Golang
+In Go language, a channel is a medium through which a goroutine communicates with another goroutine and this communication is lock-free. 
+Or in other words, a channel is a technique which allows to let one goroutine to send data to another goroutine. 
+By default channel is bidirectional, means the goroutines can send or receive data through the same channel
+In Go language, a channel is created using chan keyword and it can only transfer data of the same type, 
+different types of data are not allowed to transport from the same channel.
+var Channel_name chan Type
+var c chan string 
+You can also create a channel using make() function using a shorthand declaration.
+c := make(chan string)
+
+
+In Go language, channel work with two principal operations one is sending and another one is receiving, both the operations collectively known as communication.
+And the direction of <- operator indicates whether the data is received or send. In the channel, the send and receive operation block 
+until another side is not ready by default. It allows goroutine to synchronize with each other without explicit locks or condition variables
+Send operation: The send operation is used to send data from one goroutine to another goroutine with the help of a channel. Values like int, float64, and bool 
+can safe and easy to send through a channel because they are copied so there is no risk of accidental concurrent access of the same value. 
+Similarly, strings are also safe to transfer because they are immutable. But for sending pointers or reference like a slice, map, etc. 
+through a channel are not safe because the value of pointers or reference may change by sending goroutine or by the receiving goroutine at the
+same time and the result is unpredicted. So, when you use pointers or references in the channel you must make sure that they can only access by the one goroutine at a time.
+Mychannel <- element
+Receive operation: The receive operation is used to receive the data sent by the send operator.
+element := <-Mychannel
+The above statement indicates that the element receives data from the channel(Mychannel). If the result of the received statement is 
+not going to use is also a valid statement. You can also write a receive statement as:
+<-Mychannel
+
+package main 
+import "fmt"
+func myfunc(ch chan int) { 
+  
+    fmt.Println(234 + <-ch) 
+} 
+func main() { 
+    fmt.Println("start Main method") 
+    // Creating a channel 
+    ch := make(chan int) 
+    go myfunc(ch) 
+    ch <- 23 
+    fmt.Println("End Main method") 
+} 
+Output:
+start Main method
+257
+End Main method
+Closing a Channel
+You can also close a channel with the help of close() function. This is an in-built function and sets a flag which indicates that no more value will send to this channel.
+close(channel_name)
+
+Important Points
+Blocking Send and Receive: In the channel when the data sent to a channel the control is blocked in that send statement until other goroutine reads from that channel.
+Similarly, when a channel receives data from the goroutine the read statement block until another goroutine statement.
+Zero Value Channel: The zero value of the channel is nil.
+For loop in Channel: A for loop can iterate over the sequential values sent on the channel until it closed.
+for item := range Chnl { 
+     // statements..
+}
+
+Length of the Channel: In channel, you can find the length of the channel using len() function. Here, the length indicates the number of value queued in the channel buffer.
+Capacity of the Channel: In channel, you can find the capacity of the channel using cap() function. Here, the capacity indicates the size of the buffer.
+
+Unidirectional Channel in Golang
+Unidirectional Channel in Golang
+As we know that a channel is a medium of communication between concurrently running goroutines so that they can send and receive data to each other. 
+By default a channel is bidirectional but you can create a unidirectional channel also. A channel that can only receive data or a channel that can only send 
+data is the unidirectional channel. The unidirectional channel can also create with the help of make() function as shown below:
+send : make(chan<-bool)
+recieve : make(<-chan bool)
+
+Converting Bidirectional Channel into the Unidirectional Channel
+In Go language, you are allowed to convert a bidirectional channel into the unidirectional channel, or in other words, you can convert a bidirectional 
+channel into a receive-only or send-only channel, but vice versa is not possible. As shown in the below program:
+
+Use of Unidirectional Channel: The unidirectional channel is used to provide the type-safety of the program so, that the program gives less error. 
+Or you can also use a unidirectional channel when you want to create a channel that can only send or receive data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
